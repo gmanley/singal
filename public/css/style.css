@@ -1,0 +1,26 @@
+/* SETUP */
+
+/* Defaults */
+body { font: 14px "Helvetica Neue", Helvetica, Arial, Sans-serif }
+
+/* SITE STRUCTURE & APPEARANCE */
+#wrapper { width: 700px; margin: 20px auto }
+h1 { font-size: 30px; margin: 40px auto }
+
+/* Content */
+#content { margin: 0 auto; text-align: center }
+#content img { padding: 0 12px 12px 0 }
+
+/* Footer */
+#footer { padding: 20px 0 20px 0; text-align: center }
+#footer p { margin: 7px 0; font-weight: bold }
+
+/* Color Styles */
+
+/* Defaults */
+body { color: #3f312e; background: #fff }
+
+/* Footer */
+#footer p { color: #6d604d }
+#footer ul li a { color: #4f4f4f }
+#footer ul li.current_page_item a, #footer ul li a:hover { color: #3f312e }
