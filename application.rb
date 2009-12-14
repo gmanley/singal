@@ -3,8 +3,8 @@ require 'open-uri'
 require 'nokogiri'
 
 # My Picasa details.
-set :username, 'matthewlanguk'
-set :album_id, '5359071948544372737'
+set :username, '' # Your Picasa username goes here.
+set :album_id, '' # The album ID you want to display goes here.
 
 # Thumbnail size. Can be 32, 48, 64, 72, 144, 160. cropt (c) and uncropt (u).
 set :thumb_size, '160c'
