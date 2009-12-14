@@ -1,0 +1,5 @@
+== Picawing
+
+Inspired by a tutorial that covered creating a image gallery using the image from your Picasa account, I wanted to do something similar using Sinatra. In the future I'm going to add basic options that users of Picawing can build on.
+
+For a live demo check out the mind map gallery at MindMapSwitch Twitter[http://gallery.mindmapswitch.com].
