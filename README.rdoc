@@ -8,4 +8,4 @@ For a live demo check out the mind map gallery at MindMapSwitch[http://gallery.m
 
 You'll need your user id for to retrieve your chosen album from Picasa. To get a list of existing albums, you can use curl.
 
-curl -o albums.xml http://picasaweb.google.com/data/feed/api/user/username
+curl -o albums.xml link:http://picasaweb.google.com/data/feed/api/user/username
