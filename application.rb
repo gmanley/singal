@@ -1,10 +1,11 @@
 %w[
   rubygems
   sinatra
-  erb
+  haml
   yaml
   dm-core
   dm-migrations
+  dm-pager
   open-uri
   nokogiri
   pathname
@@ -50,7 +51,7 @@
   require APPDIR + "models/photo"
 
   get '/' do
-    @photos = Photo.all
+    @photos = Photo.page(params["page"], :per_page => 500)
     erb :index
   end
 

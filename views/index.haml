@@ -1,0 +1,6 @@
+= Photo.page(params["page"], :per_page => 500).pager.to_html("/")
+#thumbnails
+  - @photos.each do |img|
+    %a.fancybox{:href => img["content"], :rel => "gallery1", :title => "Gallery Photo"}
+      %img{:alt => "Gallery Photo", :src => img["thumbnail"], :title => "Gallery Photo"}/
+= Photo.page(params["page"], :per_page => 500).pager.to_html("/")
