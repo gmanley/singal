@@ -1,7 +1,38 @@
-require 'sinatra'
-require 'open-uri'
-require 'nokogiri'
+%w[
+  rubygems
+  sinatra
+  erb
+  open-uri
+  nokogiri
+  pathname
+  logger
+  ].each do |lib|
+    begin
+      require lib
+    rescue LoadError => e
+      puts "You need to install the #{lib} gem."
+      exit(1)
+    end
+  end
+  
+  unless defined?(APPDIR)
+    APPDIR = Pathname(Sinatra::Application.root)
+  end
 
+  configure(:production) do
+    enable(:clean_trace)
+    disable(:dump_errors)
+  end
+
+  configure(:development) do
+    use Rack::Lint
+    disable(:clean_trace)
+  end
+
+  configure do
+    enable(:logging)
+  end
+  
 # My Picasa details.
 set :username, '' # Your Picasa username goes here.
 set :album_id, '' # The album ID you want to display goes here.
