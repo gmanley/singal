@@ -33,20 +33,17 @@
     enable(:logging)
   end
   
-# My Picasa details.
-set :username, '' # Your Picasa username goes here.
-set :album_id, '' # The album ID you want to display goes here.
+  # Extra Local Requires
+  #---------------------------
+  require APPDIR + "lib/picasa"
 
-# Thumbnail size. Can be 32, 48, 64, 72, 144, 160. cropt (c) and uncropt (u).
-set :thumb_size, '160c'
-
-# Maximum size. Can be 200, 288, 320, 400, 512, 576, 640, 720, 800.
-set :max_size, '720u'
-
-# Displays information on all albums.
-get '/' do 
+get '/' do
+  config = File.open(Pathname(Sinatra::Application.root)/"config/picasa.yml") { |file| YAML.load(file) }
+  picasa = Picasa.new
+  picasa.login(config['credentials']['email'], config['credentials']['password'])
+  
   @images = Array.new
-  doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{options.username}/albumid/#{options.album_id}?kind=photo&access=public&thumbsize=#{options.thumb_size}&imgmax=#{options.max_size}"))  
+  doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{picasa.user_id}/albumid/#{options.album_id}?kind=photo&access=public&thumbsize=#{config['options']['thumb_size']}&imgmax=#{config['options']['max_size']}", "Authorization" => "GoogleLogin auth=#{picasa.auth_key}", 'GData-Version' => '2'))  
   doc.remove_namespaces!
   
   doc.xpath("//entry").each do |entry|

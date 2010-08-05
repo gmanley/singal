@@ -1,0 +1,6 @@
+credentials:
+  email: googleaccount@gmail.com
+  password: googlepassword
+options:
+  max_size: '1600u'
+  thumb_size: '160c'
