@@ -14,8 +14,6 @@ Also uses:
 * [jQuery](http://jquery.com) (Javascript Library)
 * [Fancybox](http://fancybox.net/) (Lightbox)
 
----
-
 Changes
 -------
 
@@ -27,8 +25,6 @@ Changes
 * Pagination
 * Testing!
 
----
-
 To Do
 -----
 
@@ -36,8 +32,6 @@ To Do
 * Have it cache automatically when required instead of using rake task
 * Slideshow functionality
 * Some re-factoring... especially naming conventions
-
----
 
 Setup
 -----
