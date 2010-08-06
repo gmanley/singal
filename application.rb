@@ -26,7 +26,7 @@
   def setup_db(env)
     config = File.open(APPDIR/"config"/"database.yml") { |file| YAML.load(file) }
     DataMapper::Logger.new(APPDIR/"log"/"#{env}_db.log")
-    DataMapper.setup(:default, config[env.to_s])
+    DataMapper.setup(:default, ENV['DATABASE_URL'] || config[env.to_s])
   end
 
   configure(:production) do

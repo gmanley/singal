@@ -18,7 +18,7 @@ end
 
 namespace :db do
   DataMapper::Logger.new(Pathname(Sinatra::Application.root)/"log"/"rake_db.log")
-  DataMapper.setup(:default, 'mysql://localhost/picasa_photos')
+  DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://localhost/picasa_photos')
 
   desc "Migrate the database"
   task :migrate do
