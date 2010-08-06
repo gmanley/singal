@@ -1,0 +1,8 @@
+sinatra -v 1.0
+nokogiri -v 1.4.2
+dm-core -v 1.0.0
+dm-timestamps -v 1.0.0
+dm-migrations -v 1.0.0
+dm-pager -v 1.1.0
+haml -v 3.0.15
+dm-postgres-adapter -v 1.0.0

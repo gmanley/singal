@@ -1,6 +1,5 @@
 .DS_Store
 log/*
 tmp/*
-.gems
 config/database.yml
 config/picasa.yml
