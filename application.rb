@@ -51,17 +51,14 @@
   require APPDIR + "models/photo"
 
   get '/' do
-    @photos = Photo.page(params["page"], :per_page => 500)
-    erb :index
+    @photos = Photo.page(params["page"], :per_page => 50)
+    haml :index
   end
 
-  get '/album/:album_id' do
+  get '/:user_id/:album_id' do
     config = File.open(APPDIR + "config/picasa.yml") { |file| YAML.load(file) }
-    picasa = Picasa.new
-    picasa.login(config['credentials']['email'], config['credentials']['password'])
-
     @images = [] 
-    doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{picasa.user_id}/albumid/#{params[:album_id]}?kind=photo&thumbsize=#{config['options']['thumb_size']}&imgmax=#{config['options']['max_size']}", "Authorization" => "GoogleLogin auth=#{picasa.auth_key}", 'GData-Version' => '2'))
+    doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{params[:user_id]}/albumid/#{params[:album_id]}?kind=photo&thumbsize=#{config['options']['thumb_size']}&imgmax=#{config['options']['max_size']}", 'GData-Version' => '2'))
     doc.remove_namespaces!
 
     doc.xpath("//entry").each do |entry|
@@ -85,5 +82,5 @@
       end
     end
 
-    erb :index
+    haml :index
   end
