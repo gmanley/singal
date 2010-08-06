@@ -55,6 +55,10 @@
     haml :index
   end
 
+  get '/slideshow' do
+    haml :'slideshow/index', {:layout => :"slideshow/layout"}
+  end
+
   get '/:user_id/:album_id' do
     config = File.open(APPDIR + "config/picasa.yml") { |file| YAML.load(file) }
     @images = [] 
@@ -82,5 +86,5 @@
       end
     end
 
-    haml :index
+    haml :album
   end
