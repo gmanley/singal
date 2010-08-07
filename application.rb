@@ -56,10 +56,15 @@
   end
 
   get '/slideshow' do
+    @photos = Photo.page(params["page"], :per_page => 500)
     haml :'slideshow/index', {:layout => :"slideshow/layout"}
   end
 
-  get '/:user_id/:album_id' do
+  error OpenURI::HTTPError do
+    'Can not find specified album id or user. Please make sure they are correct.'
+  end
+
+  get '/album/:user_id/:album_id' do
     config = File.open(APPDIR + "config/picasa.yml") { |file| YAML.load(file) }
     @images = [] 
     doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{params[:user_id]}/albumid/#{params[:album_id]}?kind=photo&thumbsize=#{config['options']['thumb_size']}&imgmax=#{config['options']['max_size']}", 'GData-Version' => '2'))
