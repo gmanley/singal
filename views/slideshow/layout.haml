@@ -6,15 +6,17 @@
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
     %meta{:content => "en-us", "http-equiv" => "Content-Language"}/
     %link{:href => "/css/slideshow.css", :rel => "stylesheet", :type => "text/css"}/ 
+    %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", :type => "text/javascript"}
+    %script{:src => "js/jquery.history.js", :type => "text/javascript"}
+    %script{:src => "js/jquery.galleriffic.js", :type => "text/javascript"}
+    %script{:src => "js/jquery.opacityrollover.js", :type => "text/javascript"}
+    :javascript
+      document.write('<style>.noscript { display: none; }</style>');
   %body
     #page
       #container
         %h1 Soshi Picasa Slideshow
         = yield
         %div{:style => "clear: both;"}
-			
-    %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", :type => "text/javascript"}
-    %script{:src => "js/jquery.history.js", :type => "text/javascript"}
-    %script{:src => "js/jquery.galleriffic.js", :type => "text/javascript"}
-    %script{:src => "js/jquery.opacityrollover.js", :type => "text/javascript"}
     %script{:src => "js/slideshow.js", :type => "text/javascript"}
+    
