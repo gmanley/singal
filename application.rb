@@ -51,7 +51,7 @@
   require APPDIR + "models/photo"
 
   get '/' do
-    @photos = Photo.page(params["page"], :per_page => 50)
+    @photos = Photo.page(params["page"], :per_page => 100)
     haml :index
   end
 
