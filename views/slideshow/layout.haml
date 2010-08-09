@@ -5,18 +5,8 @@
     %title Soshi Picasa Slideshow
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
     %meta{:content => "en-us", "http-equiv" => "Content-Language"}/
-    %link{:href => "/css/slideshow.css", :rel => "stylesheet", :type => "text/css"}/ 
     %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", :type => "text/javascript"}
-    %script{:src => "js/jquery.history.js", :type => "text/javascript"}
-    %script{:src => "js/jquery.galleriffic.js", :type => "text/javascript"}
-    %script{:src => "js/jquery.opacityrollover.js", :type => "text/javascript"}
-    :javascript
-      document.write('<style>.noscript { display: none; }</style>');
+    %script{:src => "/js/galleria/galleria.js", :type => "text/javascript"}
+    %script{:src => "/js/galleria/themes/fullscreen/galleria.fullscreen.js", :type => "text/javascript"}
   %body
-    #page
-      #container
-        %h1 Soshi Picasa Slideshow
-        = yield
-        %div{:style => "clear: both;"}
-    %script{:src => "js/slideshow.js", :type => "text/javascript"}
-    
+    = yield

@@ -6,6 +6,7 @@
   dm-core
   dm-migrations
   dm-pager
+  dm-serializer/to_json
   open-uri
   nokogiri
   pathname
@@ -18,6 +19,8 @@
       exit(1)
     end
   end
+  
+  #mime_type :json, "application/json"
 
   unless defined?(APPDIR)
     APPDIR = Pathname(Sinatra::Application.root)
@@ -56,8 +59,12 @@
   end
 
   get '/slideshow' do
-    @photos = Photo.page(params["page"], :per_page => 500)
     haml :'slideshow/index', {:layout => :"slideshow/layout"}
+  end
+  
+  get '/slideshow.json' do
+    content_type :json
+    Photo.all.to_json
   end
 
   error OpenURI::HTTPError do

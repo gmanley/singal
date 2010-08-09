@@ -1,16 +1,11 @@
-.navigation-container
-  #thumbs.navigation
-    %a.pageLink.prev{:href => "#", :style => "visibility: hidden;", :title => "Previous Page"}
-    %ul.thumbs.noscript  
-      - @photos.each do |img|
-        %li
-          %a.thumb{:href => img["content"], :title => "Gallery Photo", :title => "Gallery Photo"}
-            %img{:alt => "Gallery Photo", :src => img["thumbnail"]}/
-    %a.pageLink.next{:href => "#", :style => "visibility: hidden;", :title => "Next Page"}
-.content
-  .slideshow-container
-    #controls.controls
-    #loading.loader
-    #slideshow.slideshow
-  #caption.caption-container
-    .photo-index
+#galleria
+:javascript
+  var data = 
+  $.getJSON("/slideshow.json", false, function(data) {
+        $('#galleria').galleria({
+            data_source:data,
+            image_crop: false,
+            frame_color: '#000',
+            transition: 'fade'
+          });
+        });
