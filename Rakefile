@@ -46,17 +46,24 @@ namespace :db do
       doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{picasa.user_id}/albumid/#{album_id}?kind=photo&thumbsize=#{config['options']['thumb_size']}&imgmax=#{config['options']['max_size']}&fields=entry(media:group(media:content,media:thumbnail))", "Authorization" => "GoogleLogin auth=#{picasa.auth_key}", 'GData-Version' => '2'))  
       doc.remove_namespaces!
 
-      image = Hash.new
+      doc.xpath("//entry").each do |entry|
+        entry.children.each do |n|
+          if n.node_name == "group"
 
-      doc.xpath("//entry/group").children.each do |g|
-        case g.node_name
-        when "content"
-          image["image"] = g.attribute("url").content
-        when "thumbnail"
-          image["thumb"] =  g.attribute("url").content
+            image = Hash.new
+
+            n.children.each do |g|
+              case g.node_name
+              when "content"
+                image["image"] = g.attribute("url").content
+              when "thumbnail"
+                image["thumb"] =  g.attribute("url").content
+              end
+            end
+
+            @images << image
+          end
         end
-
-        @images << image
       end
     end
     @images.each do |image|
