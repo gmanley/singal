@@ -5,7 +5,11 @@ $('#content').infinitescroll({
   local      : true
 });
 
-$(document).ready(function(){
+Shadowbox.init({
+animate: false
+});
+
+$(document).ready(function(){  
 
 $('ul.pager:first').hide();
 
