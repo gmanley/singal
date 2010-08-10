@@ -5,12 +5,9 @@ $('#content').infinitescroll({
   local      : true
 });
 
-Shadowbox.init({
-animate: false
-});
+$(document).ready(function(){
 
-$(document).ready(function(){  
-
+$("a[rel='gallery1']").colorbox();
 $('ul.pager:first').hide();
 
 });
