@@ -1,6 +1,15 @@
+# Your picasa (google) login information
 credentials:
   email: googleaccount@gmail.com
   password: googlepassword
 options:
-  max_size: '1600u'
-  thumb_size: '160c'
+ # =====================
+ # = Avaliable Options =
+ # =====================
+ # max_size or thumb_size:
+ # 94, 110, 128, 200, 220, 288, 320, 400, 512, 576, 640, 720, 800, 912, 1024, 1152, 1280, 1440, 1600 always returns uncropped images
+ # 32, 48, 64, 72, 104, 144, 150, 160 lets you pass append 'c' or 'u' for cropped or uncropped respectivly
+ # # max_size only:
+ # The 'd' option will return the original unmodified image
+ max_size: '1600'
+ thumb_size: '160c'
