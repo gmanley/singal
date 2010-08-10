@@ -6,4 +6,4 @@ dm-migrations -v 1.0.0
 dm-pager -v 1.1.0
 haml -v 3.0.15
 dm-postgres-adapter -v 1.0.0
-json -v 1.4.3
+dm-serializer -v 1.0.0
