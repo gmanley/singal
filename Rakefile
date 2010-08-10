@@ -8,6 +8,8 @@ require 'nokogiri'
 
 require Pathname(Sinatra::Application.root)/"lib"/"picasa"
 require Pathname(Sinatra::Application.root)/"models"/"photo"
+DataMapper::Logger.new(Pathname(Sinatra::Application.root)/"log"/"rake_db.log")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://localhost/picasa_photos')
 
 namespace :log do
   desc "clear log files"
@@ -17,13 +19,14 @@ namespace :log do
 end
 
 namespace :db do
-  DataMapper::Logger.new(Pathname(Sinatra::Application.root)/"log"/"rake_db.log")
-  DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://localhost/picasa_photos')
 
   desc "Migrate the database"
   task :migrate do
     Photo.auto_migrate!
   end
+end
+
+namespace :picasa do
 
   desc "Parse picasa photo feed."
   task :parse do
@@ -71,5 +74,8 @@ namespace :db do
       as.attributes = image
       as.save
     end
+    f = File.new(File.join(Pathname(Sinatra::Application.root), 'public', "slideshow.json"), "w") 
+    f.syswrite(Photo.all.to_json)
+    f.close
   end
 end

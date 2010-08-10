@@ -60,11 +60,6 @@
     haml :'slideshow/index', {:layout => :"slideshow/layout"}
   end
 
-  get '/slideshow.json' do
-    content_type :json
-    Photo.all.to_json
-  end
-
   error OpenURI::HTTPError do
     'Can not find specified album id or user. Please make sure they are correct.'
   end
