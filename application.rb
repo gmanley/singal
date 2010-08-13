@@ -88,6 +88,6 @@
   end
   
   get '/bot' do
+    status 403
     haml :bot
-    #redirect params[:to] and return
   end
