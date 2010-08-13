@@ -74,8 +74,5 @@ namespace :picasa do
       as.attributes = image
       as.save
     end
-    f = File.new(File.join(Pathname(Sinatra::Application.root), 'public', "slideshow.json"), "w") 
-    f.syswrite(Photo.all.to_json)
-    f.close
   end
 end

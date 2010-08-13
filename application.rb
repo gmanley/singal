@@ -6,7 +6,6 @@
   dm-core
   dm-migrations
   dm-pager
-  dm-serializer/to_json
   open-uri
   nokogiri
   pathname
@@ -54,10 +53,6 @@
   get '/' do
     @photos = Photo.page(params["page"], :per_page => 100)
     haml :index
-  end
-
-  get '/slideshow' do
-    haml :'slideshow/index', {:layout => :"slideshow/layout"}
   end
 
   error OpenURI::HTTPError do
