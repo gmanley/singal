@@ -91,3 +91,8 @@
 
     haml :album
   end
+  
+  get '/bot' do
+    haml :bot
+    #redirect params[:to] and return
+  end
