@@ -86,7 +86,7 @@
 
     haml :album
   end
-  
+
   get '/bot' do
     status 403
     haml :bot
