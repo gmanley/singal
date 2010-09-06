@@ -3,7 +3,7 @@ require "pathname"
 root_dir = Pathname(__FILE__).dirname.join('..').expand_path
 
 ENV["RACK_ENV"] ||= "development"
-ENV["CONFIG_RU"] ||= root_dir + "config.ru"
+ENV["CONFIG_RU"] ||= root_dir.to_path + "/config.ru"
 
 require "rack/test"
 
@@ -39,7 +39,7 @@ module RackIRB
       def reload!
         @reloader ||= Rack::Reloader.new(app)
         @reloader.reload!
-        load(File.join(sinatra.root, 'script', 'app_loader.rb'))
+        load(Pathname(__FILE__).dirname.join('../script', 'app_loader.rb').open)
       end
             
       def console_help
