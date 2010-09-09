@@ -3,13 +3,13 @@ class ImageProcessor
   def initialize
     @config = File.open(Pathname(Sinatra::Application.root)/"config/picasa.yml") { |file| YAML.load(file) }
     picasa = Picasa.new
-    picasa.login(config['credentials']['email'], config['credentials']['password'])
+    picasa.login(@config['credentials']['email'], @config['credentials']['password'])
   end
 
   def run
     collect_albums
     process_albums
-    create_images_in_db
+    cache_images
   end
 
   def collect_albums
@@ -26,8 +26,7 @@ class ImageProcessor
     @images = []
 
     @albums.each do |album_id|
-      config = File.open(Pathname(Sinatra::Application.root)/"config/picasa.yml") { |file| YAML.load(file) }
-      doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{picasa.user_id}/albumid/#{album_id}?kind=photo&thumbsize=#{config['options']['thumb_size']}&imgmax=#{config['options']['max_size']}&fields=entry(media:group(media:content,media:thumbnail))", "Authorization" => "GoogleLogin auth=#{picasa.auth_key}", 'GData-Version' => '2'))
+      doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{picasa.user_id}/albumid/#{album_id}?kind=photo&thumbsize=#{@config['options']['thumb_size']}&imgmax=#{@config['options']['max_size']}&fields=entry(media:group(media:content,media:thumbnail))", "Authorization" => "GoogleLogin auth=#{picasa.auth_key}", 'GData-Version' => '2'))
       doc.remove_namespaces!
 
       doc.xpath("//entry").each do |entry|
@@ -41,7 +40,7 @@ class ImageProcessor
               when "content"
                 image["image"] = g.attribute("url").content
               when "thumbnail"
-                image["thumb"] =  g.attribute("url").content
+                image["thumb"] = g.attribute("url").content
               end
             end
 
@@ -52,7 +51,7 @@ class ImageProcessor
     end
   end
 
-  def create_images_in_db
+  def cache_images
     @images.each do |image|
       as = Photo.new
       as.attributes = image
