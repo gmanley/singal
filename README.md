@@ -11,8 +11,8 @@ Also uses:
 * [NokoGiri](http://nokogiri.org) (XML Parser)
 * [HAML](http://haml-lang.com) (Markup Language)
 * [DM-Pager](http://github.com/visionmedia/dm-pagination) (Pagination)
-* [jQuery](http://jquery.com) (Javascript Library)
-* [Fancybox](http://fancybox.net/) (Lightbox)
+* [jQuery](http://jquery.com) (Javascript Framework)
+* [ColorBox](http://colorpowered.com/colorbox) (Lightbox)
 
 Changes
 -------
@@ -23,14 +23,14 @@ Changes
 * Database caching of urls for large amounts of images
 * Album only view at /albums/5499581012762369889 (Album ID)
 * Pagination
-* Testing!
+* Testing! (Well at least a start)
 
 To Do
 -----
 
 * A easy way to turn caching on and off
-* Have it cache automatically when required instead of using rake task
-* Slideshow functionality
+* Refactor rake task into class
+* More testing
 * Some re-factoring... especially naming conventions
 
 Setup
@@ -46,5 +46,5 @@ __Requirements:__
 3. Modify said files with your mysql information
 4. run `rake db:migrate` in app directory
 5. Rename picasa.yml.example and modify information
-6. run `rake db:parse` to cache photo information (may take some time depending on amount of images and your connection/computer).
+6. run `rake picasa:parse` to cache photo information (may take some time depending on amount of images and your connection/computer).
 7. run `ruby application.rb` in app directory
