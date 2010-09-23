@@ -1,5 +1,4 @@
 %w[
-  rubygems
   sinatra
   haml
   yaml
@@ -20,12 +19,14 @@
   end
 
   unless defined?(APPDIR)
-    APPDIR = Pathname(Sinatra::Application.root)
+    #Application.root doesn't seem to work in 1.9
+    #APPDIR = Pathname(Sinatra::Application.root)
+    APPDIR = File.dirname(__FILE__)
   end
 
   def setup_db(env)
-    config = File.open(APPDIR/"config"/"database.yml") { |file| YAML.load(file) }
-    DataMapper::Logger.new(APPDIR/"log"/"#{env}_db.log")
+    config = File.open(APPDIR + "/config/database.yml") { |file| YAML.load(file) }
+    DataMapper::Logger.new(APPDIR + "/log/#{env}_db.log")
     DataMapper.setup(:default, ENV['DATABASE_URL'] || config[env.to_s])
   end
 
@@ -47,8 +48,8 @@
 
   # Extra Local Requires
   #---------------------------
-  require APPDIR + "lib/picasa"
-  require APPDIR + "models/photo"
+  require APPDIR + "/lib/picasa"
+  require APPDIR + "/models/photo"
 
   get '/' do
     @photos = Photo.page(params["page"], :per_page => 100)
@@ -60,7 +61,7 @@
   end
 
   get '/album/:user_id/:album_id' do
-    config = File.open(Pathname(Sinatra::Application.root)/"config/picasa.yml") { |file| YAML.load(file) }
+    config = File.open(APPDIR + "/config/picasa.yml") { |file| YAML.load(file) }
     doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{picasa.user_id}/albumid/#{album_id}?kind=photo&thumbsize=#{config['options']['thumb_size']}&imgmax=#{config['options']['max_size']}&fields=entry(media:group(media:content,media:thumbnail))", "Authorization" => "GoogleLogin auth=#{picasa.auth_key}", 'GData-Version' => '2'))  
     doc.remove_namespaces!
 
