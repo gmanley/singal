@@ -15,6 +15,9 @@ class ImageProcessor
     find_albums
     process_albums
     process_images
+    if cache?
+      cache_image_urls
+    end
   end
 
   def find_albums
@@ -65,20 +68,6 @@ class ImageProcessor
       as = Photo.new
       as.attributes = image
       as.save
-    end
-  end
-end
-
-class AlbumBuilder < ImageProcessor
-end
-
-class CacheBuilder < ImageProcessor
-  def run
-    find_albums
-    process_albums
-    process_images
-    if cache?
-      cache_image_urls
     end
   end
 end
