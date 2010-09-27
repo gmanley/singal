@@ -13,3 +13,4 @@ options:
  # The 'd' option will return the original unmodified image
  max_size: '1600'
  thumb_size: '160c'
+ cache: true # Turn on or off database caching.
