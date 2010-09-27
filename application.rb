@@ -62,7 +62,7 @@
 
   get '/album/:user_id/:album_id' do
     config = File.open(APPDIR + "/config/picasa.yml") { |file| YAML.load(file) }
-    doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{params[:user_id]}/albumid/#{params[album_id]}?kind=photo&thumbsize=#{config['options']['thumb_size']}&imgmax=#{config['options']['max_size']}&fields=entry(media:group(media:content,media:thumbnail))", "Authorization" => "GoogleLogin auth=#{picasa.auth_key}", 'GData-Version' => '2'))
+    doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{params[:user_id]}/albumid/#{params[:album_id]}?kind=photo&thumbsize=#{config['options']['thumb_size']}&imgmax=#{config['options']['max_size']}&fields=entry(media:group(media:content,media:thumbnail))", "Authorization" => "GoogleLogin auth=#{picasa.auth_key}", 'GData-Version' => '2'))
     doc.remove_namespaces!
 
     doc.xpath("//entry").each do |entry|
