@@ -39,7 +39,7 @@ module RackIRB
       def reload!
         @reloader ||= Rack::Reloader.new(app)
         @reloader.reload!
-        load('script/app_loader')
+        load('script/app_loader.rb')
       end
             
       def console_help
