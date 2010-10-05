@@ -1,13 +1,8 @@
-# Use the ruby 1.9.2 & the picawing gemset
+# Use the ruby 1.8.7 & the picawing gemset
 # If they don't exsist build/create them first
-rvm --create --install 1.9.2@picawing
+rvm --create --install 1.8.7@picawing
 # Install bundler if it isn't installed
 if ! command -v bundle >/dev/null 2>&1 ; then
     echo "Installing bundler gem"
     gem install bundler
-fi
-# If bundle is missing dependancies or is non-existent then run bundle install
-if ! bundle check >/dev/null 2>&1 ; then
-  echo "Creating gem bundle"
-  bundle install
 fi
