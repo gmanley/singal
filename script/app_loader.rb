@@ -3,7 +3,7 @@ require "pathname"
 root_dir = Pathname(__FILE__).dirname.join('..').expand_path
 
 ENV["RACK_ENV"] ||= "development"
-ENV["CONFIG_RU"] ||= root_dir.to_path + "/config.ru"
+ENV["CONFIG_RU"] ||= root_dir.to_s + "/config.ru"
 
 require "rack/test"
 
@@ -11,45 +11,45 @@ module RackIRB
   class Session
     include Rack::Test::Methods
     attr_reader :app
-    
+
     def initialize(app)
       @app = app
     end
-    
+
     def env; ENV['RACK_ENV']; end
   end
-  
+
   def self.run!
     # prevent STDOUT & STDERR to be reopened (apps do this to be able to log under Passenger)
     def STDOUT.reopen(*args); end
     def STDERR.reopen(*args); end
-    
+
     # build Rack app
-    config_ru = ENV['CONFIG_RU']    
+    config_ru = ENV['CONFIG_RU']
     $rack_app = Object.class_eval("Rack::Builder.new { #{IO.read(config_ru)} }", config_ru)
-    Object.class_eval { 
+    Object.class_eval {
       def app
         @app ||= RackIRB::Session.new($rack_app)
       end
-      
+
       def sinatra
         Sinatra::Application
       end
-      
+
       def reload!
         @reloader ||= Rack::Reloader.new(app)
         @reloader.reload!
         load('script/app_loader.rb')
       end
-            
+
       def console_help
         help = <<-HELP
 ---
 Methods:
-  app             => RackIRB::Session, responds to all rack methods 
+  app             => RackIRB::Session, responds to all rack methods
                      (see rdoc of Rack::Test::Methods)
   sinatra         => Sinatra::Application, the actual application
-  reload!         => Reload the Sinatra Application (only affects 
+  reload!         => Reload the Sinatra Application (only affects
                      files that have been touched)
   console_help    => This help message.
         HELP

@@ -1,5 +1,4 @@
 %w[
-  sinatra
   haml
   yaml
   dm-core
@@ -7,7 +6,6 @@
   dm-pager
   open-uri
   nokogiri
-  pathname
   logger
   ].each do |lib|
     begin

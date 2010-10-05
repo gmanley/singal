@@ -4,3 +4,4 @@ tmp/*
 config/database.yml
 config/picasa.yml
 public/slideshow.json
+.bundle/*
