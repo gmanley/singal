@@ -1,17 +1,19 @@
 require 'rubygems'
 require 'bundler'
 require 'sinatra'
-Bundler.setup(:default, Sinatra::Application.environment)
 
-root_dir = File.dirname(__FILE__)
-require "#{root_dir}/application"
+APPENV = Sinatra::Application.environment
+APPDIR = Sinatra::Application.root
 
-set :root,  root_dir
-set :app_file, File.join(root_dir, 'application.rb')
+Bundler.setup(:default, APPENV)
+require APPDIR + "/application"
+
+set :root,  APPDIR
+set :app_file, File.join(APPDIR, 'application.rb')
 disable :run
 
-FileUtils.mkdir_p File.join(root_dir, 'log') unless File.exists?('log')
-log = File.new(File.join(root_dir, 'log', "#{Sinatra::Application.environment}.log"), "a")
+FileUtils.mkdir_p File.join(APPDIR, 'log') unless File.exists?('log')
+log = File.new(File.join(APPDIR, 'log', "#{APPENV}.log"), "a")
 $stdout.reopen(log)
 $stderr.reopen(log)
 

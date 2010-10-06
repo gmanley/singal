@@ -16,12 +16,6 @@
     end
   end
 
-  unless defined?(APPDIR)
-    #Application.root doesn't seem to work in 1.9
-    #APPDIR = Pathname(Sinatra::Application.root)
-    APPDIR = File.dirname(__FILE__)
-  end
-
   def setup_db(env)
     config = File.open(APPDIR + "/config/database.yml") { |file| YAML.load(file) }
     DataMapper::Logger.new(APPDIR + "/log/#{env}_db.log")

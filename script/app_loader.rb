@@ -1,9 +1,5 @@
-require 'rubygems'
-require "pathname"
-root_dir = Pathname(__FILE__).dirname.join('..').expand_path
-
 ENV["RACK_ENV"] ||= "development"
-ENV["CONFIG_RU"] ||= root_dir.to_s + "/config.ru"
+ENV["CONFIG_RU"] ||= File.join(File.dirname(__FILE__), '..', '/config.ru')
 
 require "rack/test"
 
