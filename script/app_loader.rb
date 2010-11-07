@@ -1,5 +1,5 @@
 ENV["RACK_ENV"] ||= "development"
-ENV["CONFIG_RU"] ||= File.join(File.dirname(__FILE__), '..', '/config.ru')
+ENV["CONFIG_RU"] ||= File.dirname(__FILE__) + '/../config.ru')
 
 require "rack/test"
 
@@ -52,7 +52,7 @@ Methods:
         puts help
       end
     }
-    # $rack_app = nil
+
     # print startup info
     if STDOUT.tty? && ENV['TERM'] != 'dumb' # we have color terminal, let's pimp our info!
       env_color = (Object.app.env == 'production' ? "\e[31m\e[1m" : "\e[36m\e[1m")
