@@ -6,7 +6,7 @@ require 'dm-migrations'
 require 'open-uri'
 require 'nokogiri'
 
-APPDIR = Sinatra::Application.root
+APPDIR = Picawing.root
 
 namespace :log do
   desc "clear log files"

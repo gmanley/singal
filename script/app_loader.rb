@@ -1,6 +1,7 @@
 ENV["RACK_ENV"] ||= "development"
-ENV["CONFIG_RU"] ||= File.dirname(__FILE__) + '/../config.ru')
+ENV["CONFIG_RU"] ||= File.dirname(__FILE__) + '/../config.ru'
 
+require "rubygems"
 require "rack/test"
 
 module RackIRB
@@ -29,7 +30,7 @@ module RackIRB
       end
 
       def sinatra
-        Sinatra::Application
+        Picawing
       end
 
       def reload!

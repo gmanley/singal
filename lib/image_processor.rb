@@ -1,15 +1,3 @@
-require 'rubygems'
-require 'yaml'
-require 'logger'
-require 'nokogiri'
-require 'open-uri'
-
-unless defined?(APPDIR)
-  APPDIR = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-end
-
-require APPDIR + "/lib/picasa"
-
 class ImageProcessor
 
   def initialize
@@ -70,16 +58,11 @@ class ImageProcessor
   end
 
   def cache_image_urls
-    require 'dm-core'
-    require APPDIR + "/models/photo"
-
-    DataMapper::Logger.new(APPDIR + "/log/rake_db.log")
-    DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://localhost/picasa_photos')
-
     @images.each do |image|
       as = Photo.new
       as.attributes = image
       as.save
     end
   end
+
 end
