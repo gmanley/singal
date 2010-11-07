@@ -8,7 +8,7 @@ class Picasa
   def login(email, password)
     url = "https://www.google.com/accounts/ClientLogin"
     source = "TestCompany-Picawing-0.0.1"
-  
+
     uri = URI.parse(url)
 
     request = Net::HTTP.new(uri.host, uri.port)
@@ -20,10 +20,10 @@ class Picasa
     if authMatch
       authorizationKey = authMatch[2].to_s
     end
-  
+
     self.auth_key = authorizationKey
     self.user_id = email
-  
+
     return authorizationKey
   end
 end
