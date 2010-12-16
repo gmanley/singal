@@ -15,9 +15,7 @@ class ImageProcessor
     find_albums
     process_albums
     process_images
-    if cache?
-      cache_image_urls
-    end
+    cache_image_urls if cache?
   end
 
   def find_albums
@@ -29,6 +27,7 @@ class ImageProcessor
   end
 
   def process_albums
+    @image_groups = []
     @albums.each do |album_id|
       doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{@picasa.user_id}/albumid/#{album_id}?kind=photo&thumbsize=#{@config['options']['thumb_size']}&imgmax=#{@config['options']['max_size']}&fields=entry(media:group(media:content,media:thumbnail))", "Authorization" => "GoogleLogin auth=#{@picasa.auth_key}", 'GData-Version' => '2'))
       doc.remove_namespaces!
@@ -36,24 +35,26 @@ class ImageProcessor
       doc.xpath("//entry").each do |entry|
         entry.children.each do |n|
           if n.node_name == "group"
-            process_images(n)
+            @image_groups << n
           end
         end
       end
     end
   end
 
-  def process_images(image_group)
+  def process_images
     @images = []
     image = {}
-    image_group.children.each do |g|
-      case g.node_name
-      when "content"
-        image["image"] = g.attribute("url").content
-      when "thumbnail"
-        image["thumb"] = g.attribute("url").content
+    @image_groups.each do |image_group|
+      image_group.children.each do |g|
+        case g.node_name
+        when "content"
+          image["image"] = g.attribute("url").content
+        when "thumbnail"
+          image["thumb"] = g.attribute("url").content
+        end
+        @images << image
       end
-      @images << image
     end
   end
 
@@ -64,5 +65,4 @@ class ImageProcessor
       as.save
     end
   end
-
 end
