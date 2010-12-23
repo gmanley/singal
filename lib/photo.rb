@@ -1,5 +1,3 @@
-require 'dm-timestamps'
-
 class Photo
   include DataMapper::Resource
 

@@ -1,13 +1,13 @@
-class Picawing < Sinatra::Application
+module Picawing
+    class App < Sinatra::Base
+    
+    set :root, File.dirname(__FILE__)
+    require "lib/init"
 
-  get '/' do
-    @photos = Photo.page(params["page"], :per_page => 100)
-    haml :index
+    get '/' do
+      @photos = Photo.page(params["page"], :per_page => 100)
+      haml :index
+    end
+
   end
-
-  get '/bot' do
-    status 403
-    haml :bot
-  end
-
 end

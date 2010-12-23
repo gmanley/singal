@@ -2,6 +2,6 @@
 log/*
 tmp/*
 config/database.yml
-config/picasa.yml
+config/config.yml
 public/slideshow.json
-.bundle/*
+.bundle
