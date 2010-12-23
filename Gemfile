@@ -21,7 +21,6 @@ group :development, :test do
   gem 'rack-test'
   gem 'rspec'
   gem 'redgreen'
-  #gem 'capistrano' 
-  #gem 'capistrano-ext'
-  #gem 'capistrano-recipes'
+  gem 'cucumber'
+  gem 'capybara'
 end
