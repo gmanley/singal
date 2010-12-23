@@ -16,6 +16,7 @@ namespace :db do
   desc "Migrate the database"
   task :migrate do
     require "lib/photo"
+    DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://localhost/picasa_photos')
     Photo.auto_migrate!
   end
 end

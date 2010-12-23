@@ -49,8 +49,8 @@ class ImageProcessor
   def process_images
     puts "Processing images."
     @images = []
-    image = {}
     @image_groups.each do |image_group|
+      image = {}
       image_group.children.each do |g|
         case g.node_name
         when "content"
@@ -58,8 +58,9 @@ class ImageProcessor
         when "thumbnail"
           image["thumb"] = g.attribute("url").content
         end
-        @images << image
       end
+
+      @images << image
     end
   end
 
