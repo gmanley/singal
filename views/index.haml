@@ -1,6 +1,8 @@
+%h1
+  %a{:href => "/"} Picasa Gallery
 = Photo.page(params["page"], :per_page => 100).pager.to_html("/")
 #thumbnails
   - @photos.each do |img|
-    %a.gallery{:href => "/bot?#{img['image']}", :rel => "gallery1"}
-      %img{:alt => "Gallery Photo", :src => img["thumb"]}/
+    %a.thumbnail{:href => img['image'], :rel => "gallery"}
+      %img{:src => img["thumb"]}/
 = Photo.page(params["page"], :per_page => 100).pager.to_html("/")
