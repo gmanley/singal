@@ -1,5 +1,6 @@
-require 'rubygems'
-require 'rake'
+require "rubygems"
+require "bundler"
+Bundler.setup
 
 namespace :log do
   desc "clear log files"
@@ -12,14 +13,9 @@ namespace :log do
 end
 
 namespace :db do
-  require "dm-core"
-  require "dm-migrations"
-  require "lib/photo"
-  DataMapper::Logger.new("log/rake_db.log")
-  DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://localhost/picasa_photos')
-
   desc "Migrate the database"
   task :migrate do
+    require "lib/photo"
     Photo.auto_migrate!
   end
 end

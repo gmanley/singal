@@ -1,3 +1,7 @@
+require 'dm-core'
+require 'dm-timestamps'
+require 'dm-migrations'
+
 class Photo
   include DataMapper::Resource
 

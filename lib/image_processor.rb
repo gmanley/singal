@@ -1,24 +1,27 @@
+require 'open-uri'
+require 'nokogiri'
+
+require File.dirname(__FILE__) + "/photo"
+require File.dirname(__FILE__) + "/picasa"
+
 class ImageProcessor
 
   def initialize
-    @config = File.open(APPDIR + "/config/picasa.yml") { |file| YAML.load(file) }
+    @config = File.open(File.join(File.dirname(__FILE__), "/../config/config.yml")) { |file| YAML.load(file) }
     @picasa = Picasa.new
     @picasa.login(@config['credentials']['email'], @config['credentials']['password'])
-    run
+    import
   end
 
-  def cache?
-    @config['options']['cache']
-  end
-
-  def run
+  def import
     find_albums
     process_albums
     process_images
-    cache_image_urls if cache?
+    cache_image_urls
   end
 
   def find_albums
+    puts "Finding albums to import."
     @albums = []
     albums = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{@picasa.user_id}?kind=album&access=private&fields=entry(gphoto:id)", "Authorization" => "GoogleLogin auth=#{@picasa.auth_key}", 'GData-Version' => '2'))
     albums.xpath("//xmlns:entry//gphoto:id").each do |a|
@@ -27,6 +30,7 @@ class ImageProcessor
   end
 
   def process_albums
+    puts "Processing albums."
     @image_groups = []
     @albums.each do |album_id|
       doc = Nokogiri::XML(open("http://picasaweb.google.com/data/feed/api/user/#{@picasa.user_id}/albumid/#{album_id}?kind=photo&thumbsize=#{@config['options']['thumb_size']}&imgmax=#{@config['options']['max_size']}&fields=entry(media:group(media:content,media:thumbnail))", "Authorization" => "GoogleLogin auth=#{@picasa.auth_key}", 'GData-Version' => '2'))
@@ -43,6 +47,7 @@ class ImageProcessor
   end
 
   def process_images
+    puts "Processing images."
     @images = []
     image = {}
     @image_groups.each do |image_group|
@@ -59,6 +64,9 @@ class ImageProcessor
   end
 
   def cache_image_urls
+    puts "Caching images to database."
+    DataMapper::Logger.new(File.dirname(__FILE__) + "/../log/rake_db.log")
+    DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://localhost/picasa_photos')
     @images.each do |image|
       as = Photo.new
       as.attributes = image
