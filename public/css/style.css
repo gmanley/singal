@@ -1,67 +1,86 @@
 body {
-    background: #fff;
-    color: #3f312e;
-    font: 14px Helvetica, Arial, Sans-serif;
+  background: #fff;
+  color: #3f312e;
+  font: 14px Helvetica, Arial, Sans-serif;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    border:0;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 
 h1 a {
-    color: #000;
-    font-size: 30px;
-    text-decoration: none;
+  color: #000;
+  font-size: 30px;
+  text-decoration: none;
 }
 
-#container { padding: 5% }
-
-#thumbnails {
-    float: left;
-    list-style: none;
-    margin: 0 auto;
+#container {
+  clear: both;
+  float: left;
+  margin-left: 5%;
 }
 
-.thumbnail img { padding: 0px 12px 12px 0px }
+#thumbnails {  list-style: none }
 
-.pager { padding: 2% }
+.thumbnail img {  padding: 0px 12px 12px 0px }
+
+#loading {
+  -moz-opacity: 0.8;
+  background-color: #000;
+  display: none;
+  filter: alpha(opacity=80);
+  height: 100%;
+  opacity: 0.8;
+  position: fixed;
+  width: 100%;
+}
+
+#loading div {
+  font-size:34px;
+  text-align:center;
+  color:#fff;
+  margin-top:300px;
+}
+
+.pager {
+  height: 40px;
+  margin-top: 10px;
+}
 
 ul.pager li {
-    float: left;
-    font-size: 11px;
-    list-style: none;
+  float: left;
+  font-size: 11px;
+  list-style: none;
 }
 
 ul.pager li a {
-    border: solid 1px #DDDDDD;
-    margin-right: 2px;
+  border: solid 1px #DDDDDD;
+  margin-right: 2px;
 }
 
-ul.pager li a:hover { border: solid 1px #666666 }
+ul.pager li a:hover {  border: solid 1px #666666 }
 
-ul.pager li a:link,
-ul.pager li a:visited {
-    color: #0063e3;
-    display: block;
-    float: left;
-    padding: 3px 6px;
-    text-decoration: none;
+ul.pager li a:link, ul.pager li a:visited {
+  color: #0063e3;
+  display: block;
+  float: left;
+  padding: 3px 6px;
+  text-decoration: none;
 }
 
-ul.pager li.next a,
-ul.pager .previous a {
-    color: #ff0084;
-    display: block;
-    float: left;
-    font-weight: bold;
+ul.pager li.next a, ul.pager .previous a {
+  color: #ff0084;
+  display: block;
+  float: left;
+  font-weight: bold;
 }
 
 ul.pager li.active {
-    display: block;
-    float: left;
-    font-size: 14px;
-    font-weight: bold;
-    padding-bottom: 10px;
+  display: block;
+  float: left;
+  font-size: 14px;
+  font-weight: bold;
+  padding-bottom: 10px;
 }

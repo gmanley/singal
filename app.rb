@@ -1,6 +1,6 @@
 module Picawing
-    class App < Sinatra::Base
-    
+  class App < Sinatra::Base
+
     set :root, File.dirname(__FILE__)
     require "lib/init"
 
@@ -8,6 +8,5 @@ module Picawing
       @photos = Photo.page(params["page"], :per_page => 100)
       haml :index
     end
-
   end
 end
