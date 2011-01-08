@@ -44,6 +44,11 @@ h1 a {
   margin-top:300px;
 }
 
+ul.per_page {
+  float:left;
+  display:block;
+}
+
 .pager {
   height: 40px;
   margin-top: 10px;

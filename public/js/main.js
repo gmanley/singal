@@ -1,18 +1,23 @@
-$(document).ready(function () {
-
+$(function () {
   colorbox_init();
 
   $('.pager a').live('click', function () {
-    var url = $(this).attr("href");
-    var pageNumber = url.replace(/^.*\?page=/, "");
-    $.history.load(pageNumber);
+    var url = $(this).attr("href").replace(/^.*\/page\//, "#/page/");
+    AjaxLinks.setLocation(url);
     return false;
   });
 
-  $.history.init(function (pageNumber) {
-    if (pageNumber !== "") {
-      loadPage(pageNumber);
-    };
+  AjaxLinks.run();
+});
+
+var AjaxLinks = $.sammy('#content', function() {
+
+  this.get('#/page/:page_number', function() {
+    $("#loading").fadeIn("fast");
+    $('#content').load("/page/" + this.params['page_number'] + " #content > *", function () {
+      $("#loading").fadeOut("fast");
+      colorbox_init();
+    });
   });
 
 });
@@ -21,13 +26,5 @@ function colorbox_init() {
   $(".thumbnail").colorbox({
     maxWidth: "95%",
     maxHeight: "95%"
-  });
-}
-
-function loadPage(pageNumber) {
-  $("#loading").fadeIn("fast");
-  $('#content').load("/?page=" + pageNumber + " #content > *", function () {
-    $("#loading").fadeOut("fast");
-    colorbox_init();
   });
 }
