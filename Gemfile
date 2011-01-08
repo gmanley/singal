@@ -5,7 +5,7 @@ gem 'sinatra'
 gem 'dm-core'
 gem 'dm-timestamps'
 gem 'dm-migrations'
-gem 'dm-pager'
+gem 'dm-pager', :git => "git://github.com/gmanley/dm-pagination.git"
 gem 'haml'
 gem 'nokogiri'
 
