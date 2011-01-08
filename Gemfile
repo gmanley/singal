@@ -23,4 +23,5 @@ group :development, :test do
   gem 'redgreen'
   gem 'cucumber'
   gem 'capybara'
+  gem 'yui-compressor'
 end
