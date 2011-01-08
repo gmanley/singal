@@ -6,7 +6,12 @@ module Picawing
 
     get '/' do
       @photos = Photo.page(params["page"], :per_page => 100)
-      haml :index
+      haml :index, :format => :html5
+    end
+
+    get '/page/:page_number' do |page_number|
+      @photos = Photo.page(page_number, :per_page => 100)
+      haml :index, :format => :html5
     end
   end
 end
