@@ -4,6 +4,8 @@ require "logger"
 APPENV = Picawing::App.environment
 APPDIR = Picawing::App.root
 
+require 'pagination_helper'
+
 def setup_logging
   enable(:logging)
   log = File.new(File.join(APPDIR, 'log', "#{APPENV}.log"), "a")
@@ -12,8 +14,16 @@ def setup_logging
 end
 
 def setup_db
-  DataMapper::Logger.new(File.join(APPDIR, "/log/#{APPENV}_db.log"))
-  DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://localhost/picasa_photos')
+  Mongoid.configure do |config|
+    if ENV['MONGOHQ_URL']
+      conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
+      uri = URI.parse(ENV['MONGOHQ_URL'])
+      config.master = conn.db(uri.path.gsub(/^\//, ''))
+    else
+      # Refactor to use yaml file!
+      config.master = Mongo::Connection.from_uri("mongodb://localhost:27017").db("picawing")
+    end
+  end
   require "#{APPDIR}/lib/photo"
 end
 
