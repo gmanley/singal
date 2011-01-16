@@ -1,7 +1,7 @@
 $(function () {
   colorbox_init();
 
-  $('.pager a').live('click', function () {
+  $('.pagination a').live('click', function () {
     var url = $(this).attr("href").replace(/^.*\/page\//, "#/page/");
     AjaxLinks.setLocation(url);
     return false;
