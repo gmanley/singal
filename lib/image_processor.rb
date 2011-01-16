@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
+require 'mongoid'
 
-require File.dirname(__FILE__) + "/photo"
 require File.dirname(__FILE__) + "/picasa"
 
 class ImageProcessor
@@ -66,12 +66,19 @@ class ImageProcessor
 
   def cache_image_urls
     puts "Caching images to database."
-    DataMapper::Logger.new(File.dirname(__FILE__) + "/../log/rake_db.log")
-    DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://localhost/picasa_photos')
+    Mongoid.configure do |config|
+      if ENV['MONGOHQ_URL']
+        conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
+        uri = URI.parse(ENV['MONGOHQ_URL'])
+        config.master = conn.db(uri.path.gsub(/^\//, ''))
+      else
+        # Refactor to use yaml file!
+        config.master = Mongo::Connection.from_uri("mongodb://localhost:27017").db("picawing")
+      end
+    end
+    require "#{APPDIR}/lib/photo"
     @images.each do |image|
-      as = Photo.new
-      as.attributes = image
-      as.save
+      Photo.create(:image => image['image'], :thumb => image['thumb'])
     end
   end
 end
