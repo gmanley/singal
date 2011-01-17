@@ -1,13 +1,31 @@
 require 'open-uri'
 require 'nokogiri'
 require 'mongoid'
+require "yaml"
 
 require File.dirname(__FILE__) + "/picasa"
 
 class ImageProcessor
 
   def initialize
-    @config = File.open(File.join(File.dirname(__FILE__), "/../config/config.yml")) { |file| YAML.load(file) }
+    # TODO: Refactor app config in general... maybe an config class?
+    begin
+      @config = File.open(File.dirname(__FILE__) + "/../config/config.yml") { |file| YAML.load(file) }
+    rescue Exception => e
+      puts "Heroku deploy detected!\n" +
+           "Make sure you have set the following config variables:\n" +
+           "heroku config:add picasa_email=email\n" +
+           "heroku config:add picasa_password=password\n" +
+           "heroku config:add picasa_max_size=size\n" +
+           "heroku config:add picasa_thumb_size=size"
+      @config = {"credentials" => {
+                    "email" => ENV["picasa_email"], "password" => ENV["picasa_password"]
+                  },
+                  "options" => {
+                    "max_size" => ENV["picasa_max_size"], "thumb_size" =>  ENV["picasa_thumb_size"]
+                  }
+                }
+    end
     @picasa = Picasa.new
     @picasa.login(@config['credentials']['email'], @config['credentials']['password'])
     import
@@ -76,7 +94,7 @@ class ImageProcessor
         config.master = Mongo::Connection.from_uri("mongodb://localhost:27017").db("picawing")
       end
     end
-    require "#{APPDIR}/lib/photo"
+    require File.dirname(__FILE__) + "/photo"
     @images.each do |image|
       Photo.create(:image => image['image'], :thumb => image['thumb'])
     end

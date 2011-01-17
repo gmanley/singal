@@ -4,7 +4,7 @@ require "logger"
 APPENV = Picawing::App.environment
 APPDIR = Picawing::App.root
 
-require 'pagination_helper'
+require "#{APPDIR}/lib/pagination_helper"
 
 def setup_logging
   enable(:logging)
