@@ -1,25 +1,24 @@
 body {
-  background: #fff;
   color: #3f312e;
+  background: #fff;
   font: 14px Helvetica, Arial, Sans-serif;
 }
 
 * {
-  border: 0;
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
+  border: 0
 }
 
 h1 a {
   color: #000;
   font-size: 30px;
-  text-decoration: none;
+  text-decoration: none
 }
 
 #container {
-  clear: both;
   float: left;
   margin-left: 5%;
+  clear: both
 }
 
 #thumbnails {  list-style: none }
@@ -27,65 +26,61 @@ h1 a {
 .thumbnail img {  padding: 0px 12px 12px 0px }
 
 #loading {
-  -moz-opacity: 0.8;
+  display: none; position: fixed;
+  height: 100%; width: 100%;
   background-color: #000;
-  display: none;
+  -moz-opacity: 0.8;
   filter: alpha(opacity=80);
-  height: 100%;
   opacity: 0.8;
-  position: fixed;
-  width: 100%;
 }
 
 #loading div {
-  font-size:34px;
-  text-align:center;
-  color:#fff;
-  margin-top:300px;
+  margin-top: 300px;
+  color: #fff;
+  font-size: 34px;
+  text-align: center
 }
 
-ul.per_page {
-  float:left;
-  display:block;
-}
-
-.pager {
+.pagination {
   height: 40px;
-  margin-top: 10px;
+  margin-top: 10px
 }
 
-ul.pager li {
+.pagination li.next_page a,
+.pagination .previous_page a {
+  display: block; float: left;
+  color: #ff0084;
+  font-weight: bold
+}
+
+.pagination li.active p {
+  display: block; float: left;
+  padding: 2px 6px;
+  background-color: #DDD;
+  font-size: 14px; font-weight: bold;
+  cursor: default
+}
+
+.pagination li.gap {  padding: 0px 3px }
+
+.pagination li {
   float: left;
   font-size: 11px;
-  list-style: none;
+  list-style: none
 }
 
-ul.pager li a {
-  border: solid 1px #DDDDDD;
+.pagination li a,
+.pagination li p {
   margin-right: 2px;
+  border: solid 1px #DDDDDD
 }
 
-ul.pager li a:hover {  border: solid 1px #666666 }
+.pagination li a:hover {  border: solid 1px #666666 }
 
-ul.pager li a:link, ul.pager li a:visited {
-  color: #0063e3;
-  display: block;
-  float: left;
+.pagination li a:link,
+.pagination li a:visited {
+  display: block; float: left;
   padding: 3px 6px;
-  text-decoration: none;
-}
-
-ul.pager li.next a, ul.pager .previous a {
-  color: #ff0084;
-  display: block;
-  float: left;
-  font-weight: bold;
-}
-
-ul.pager li.active {
-  display: block;
-  float: left;
-  font-size: 14px;
-  font-weight: bold;
-  padding-bottom: 10px;
+  color: #0063e3;
+  text-decoration: none
 }
