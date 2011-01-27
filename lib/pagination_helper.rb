@@ -8,7 +8,7 @@ WillPaginate::ViewHelpers::LinkRenderer.class_eval do
     unless page == current_page
       tag(:li, link(page, page, :rel => rel_value(page)))
     else
-      tag(:li, tag(:p, page), :class => 'active')
+      tag(:li, tag(:p, page), :class => 'current')
     end
   end
 
@@ -20,7 +20,7 @@ WillPaginate::ViewHelpers::LinkRenderer.class_eval do
     if page
       tag(:li, link(text, page), :class => classname)
     else
-     tag(:li, text, :class => classname + ' disabled')
+     tag(:li, tag(:p, text), :class => classname + ' disabled')
     end
   end
 

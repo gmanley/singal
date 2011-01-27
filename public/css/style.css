@@ -46,28 +46,13 @@ h1 a {
   margin-top: 10px
 }
 
-.pagination li.next_page a,
-.pagination .previous_page a {
-  display: block; float: left;
-  color: #ff0084;
-  font-weight: bold
-}
-
-.pagination li.active p {
-  display: block; float: left;
-  padding: 2px 6px;
-  background-color: #DDD;
-  font-size: 14px; font-weight: bold;
-  cursor: default
-}
-
-.pagination li.gap {  padding: 0px 3px }
-
 .pagination li {
   float: left;
   font-size: 11px;
   list-style: none
 }
+
+.pagination .gap {  padding: 0px 3px }
 
 .pagination li a,
 .pagination li p {
@@ -83,4 +68,28 @@ h1 a {
   padding: 3px 6px;
   color: #0063e3;
   text-decoration: none
+}
+
+.pagination .next_page a,
+.pagination .previous_page a {
+  display: block; float: left;
+  color: #ff0084;
+  font-weight: bold
+}
+
+.pagination .next_page.disabled p,
+.pagination .previous_page.disabled p {
+  display: block; float: left;
+  padding: 3px 6px;
+  color:#DDD;
+  font-size: 12px; font-weight: normal;
+  cursor: default
+}
+
+.pagination .current p {
+  display: block; float: left;
+  padding: 2px 6px;
+  background-color: #DDD;
+  font-size: 14px; font-weight: bold;
+  cursor: default
 }
