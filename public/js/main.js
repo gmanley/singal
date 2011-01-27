@@ -1,4 +1,4 @@
-$(function () {
+head(function() {
   colorbox_init();
 
   $('.pagination a').live('click', function (e) {
