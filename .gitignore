@@ -5,3 +5,4 @@ config/database.yml
 config/config.yml
 public/slideshow.json
 .bundle
+*.rbc
