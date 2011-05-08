@@ -13,15 +13,6 @@ end
 group :development do
   gem 'shotgun'
   gem 'thin'
-end
-
-group :development, :test do
   gem 'rack-test'
   gem 'yui-compressor'
-end
-
-group :test do
-  gem 'rspec'
-  gem 'cucumber'
-  gem 'capybara'
 end
