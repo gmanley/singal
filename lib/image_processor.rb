@@ -10,7 +10,7 @@ class ImageProcessor
   def initialize
     # TODO: Refactor app config in general... maybe an config class?
     begin
-      @config = File.open(File.dirname(__FILE__) + "/../config/config.yml") { |file| YAML.load(file) }
+      @config = File.open(File.dirname(__FILE__) + "/../config/config.yml") { |file| YAML.load(file) }["picasa"]
     rescue Exception => e
       puts "Heroku deploy detected!\n" +
            "Make sure you have set the following config variables:\n" +
@@ -85,13 +85,11 @@ class ImageProcessor
   def cache_image_urls
     puts "Caching images to database."
     Mongoid.configure do |config|
-      if ENV['MONGOHQ_URL']
+      if ENV['MONGOHQ_URL'] # For heroku deploys
         conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
-        uri = URI.parse(ENV['MONGOHQ_URL'])
-        config.master = conn.db(uri.path.gsub(/^\//, ''))
+        config.master = conn.db(URI.parse(ENV['MONGOHQ_URL']).path.gsub(/^\//, ''))
       else
-        # Refactor to use yaml file!
-        config.master = Mongo::Connection.from_uri("mongodb://localhost:27017").db("picawing")
+        config.from_hash(YAML.load_file('config/config.yml')["database"][ENV["RACK_ENV"]])
       end
     end
     require File.dirname(__FILE__) + "/photo"

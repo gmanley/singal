@@ -1,8 +1,8 @@
-require "rubygems"
-require "sinatra/base"
+$:.unshift('.').uniq!
+ENV['RACK_ENV'] ||= "development"
 
-require "bundler/setup"
-Bundler.require(:default, ENV["RACK_ENV"])
+require 'bundler/setup'
+Bundler.require(:default, ENV['RACK_ENV'].to_sym)
 
-require "app"
+require 'app'
 run Picawing::App

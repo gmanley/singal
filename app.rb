@@ -1,9 +1,32 @@
+require 'yaml'
+
 module Picawing
   class App < Sinatra::Base
 
     set :root, File.dirname(__FILE__)
-    require "lib/init"
 
+    def self.setup_db
+      Mongoid.configure do |config|
+        if ENV['MONGOHQ_URL'] # For heroku deploys
+          conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
+          config.master = conn.db(URI.parse(ENV['MONGOHQ_URL']).path.gsub(/^\//, ''))
+        else
+          # Refactor to use yaml file!
+          config.from_hash(YAML.load_file('config/config.yml')["database"][settings.environment.to_s])
+        end
+      end
+      require "#{settings.root}/lib/photo"
+    end
+
+    configure(:production, :development) do
+      enable(:logging, :dump_errors)
+    end
+
+    configure do
+      setup_db
+    end
+
+    require "lib/pagination_helper"
     helpers WillPaginate::ViewHelpers::Base
 
     get '/' do

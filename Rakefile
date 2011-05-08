@@ -2,6 +2,9 @@ require "rubygems"
 require "bundler"
 Bundler.setup
 
+$:.unshift('.').uniq!
+ENV['RACK_ENV'] ||= "development"
+
 namespace :log do
   desc "clear log files"
   task :clear do
