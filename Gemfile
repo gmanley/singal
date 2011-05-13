@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'sinatra', :require => 'sinatra/base', :git => 'https://github.com/sinatra/sinatra.git', :ref => '447721528eedc9f47451'
-gem 'mongoid', "~> 2.0"
+gem 'sinatra', :require => 'sinatra/base', :git => 'git://github.com/sinatra/sinatra.git'
+gem 'mongoid', :git => 'git://github.com/gmanley/mongoid.git'
 gem 'bson_ext'
 gem 'haml'
 gem 'nokogiri'
