@@ -13,11 +13,11 @@
 #cboxTitle{color:#ccc;left:0;position:absolute;top:-20px;}
 #cboxCurrent{color:#ccc;position:absolute;right:0px;top:-20px;}
 #cboxSlideshow{color:#fff;position:absolute;right:90px;top:-20px;}
-#cboxPrevious{background:url(/images/controls.png) top left no-repeat;height:65px;left:5px;margin-top:-32px;position:absolute;text-indent:-9999px;top:50%;width:28px;}
+#cboxPrevious{background:url(http://cdn.love9.us/images/controls.png) top left no-repeat;height:65px;left:5px;margin-top:-32px;position:absolute;text-indent:-9999px;top:50%;width:28px;}
 #cboxPrevious.hover{background-position:bottom left}
-#cboxNext{background:url(/images/controls.png) top right no-repeat;height:65px;margin-top:-32px;position:absolute;right:5px;text-indent:-9999px;top:50%;width:28px;}
+#cboxNext{background:url(http://cdn.love9.us/images/controls.png) top right no-repeat;height:65px;margin-top:-32px;position:absolute;right:5px;text-indent:-9999px;top:50%;width:28px;}
 #cboxNext.hover{background-position:bottom right}
 #cboxLoadingOverlay{background:#000}
-#cboxLoadingGraphic{background:url(/images/loading.gif) center center no-repeat}
-#cboxClose{background:url(/images/controls.png) top center no-repeat;display:block;height:19px;position:absolute;right:5px;text-indent:-9999px;top:5px;width:38px;}
+#cboxLoadingGraphic{background:url(http://cdn.love9.us/images/loading.gif) center center no-repeat}
+#cboxClose{background:url(http://cdn.love9.us/images/controls.png) top center no-repeat;display:block;height:19px;position:absolute;right:5px;text-indent:-9999px;top:5px;width:38px;}
 #cboxClose.hover{background-position:bottom center}
