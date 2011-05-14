@@ -29,7 +29,7 @@ WillPaginate::ViewHelpers::LinkRenderer.class_eval do
   end
 
   def url(page)
-    url = @template.request.url
+    url = @template.request.path
     if page == 1
       url.gsub(/page\/[0-9]+/, '')
     else
