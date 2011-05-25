@@ -3,8 +3,6 @@ require 'yaml'
 module Picawing
   class App < Sinatra::Base
 
-    set :root, File.dirname(__FILE__)
-
     def self.setup_db
       Mongoid.configure do |config|
         if ENV['MONGOHQ_URL'] # For heroku deploys

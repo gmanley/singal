@@ -1,6 +1,7 @@
 GIT
   remote: git://github.com/gmanley/mongoid.git
-  revision: 89f6d3bb1486528ca49b4239751e33676a969702
+  revision: 36884d87fc6b79c7c442bcad8314060d21e799fe
+  branch: pagination
   specs:
     mongoid (2.0.1)
       activemodel (~> 3.0)
@@ -10,7 +11,7 @@ GIT
 
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: d9380a09834b253dc37f004fb0a7d1cd5679ec95
+  revision: 62cd29958095231fa1b1c01da656b42dacccff71
   specs:
     sinatra (1.3.0)
       rack (~> 1.2)

@@ -19,7 +19,7 @@ namespace :picasa do
   desc "Parse picasa photo feed."
   task :crawl do
     require "lib/image_processor"
-    ImageProcessor.new
+    Picawing::ImageProcessor.new
   end
 end
 
@@ -27,11 +27,14 @@ namespace :prepare do
   desc "Minify css and js."
   task :min do
     require "yui/compressor"
-    js = File.read(File.dirname(__FILE__) + "/public/js/main.js")
-    css = File.read(File.dirname(__FILE__) + "/public/css/style.css")
+
+    js = File.read("/public/js/main.js")
+    css = File.read("/public/css/style.css")
+
     js_minified = YUI::JavaScriptCompressor.new(:munge => true).compress(js)
     css_minified = YUI::CssCompressor.new.compress(css)
-    File.open(File.dirname(__FILE__) + "/public/js/main.min.js", 'w') {|f| f.write(js_minified)}
-    File.open(File.dirname(__FILE__) + "/public/css/style.min.css", 'w') {|f| f.write(css_minified)}
+
+    File.open("public/js/main.min.js", 'w') {|f| f.write(js_minified)}
+    File.open("public/css/style.min.css", 'w') {|f| f.write(css_minified)}
   end
 end
