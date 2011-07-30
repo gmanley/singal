@@ -29,7 +29,7 @@ module RackIRB
       end
 
       def sinatra
-        Picawing::App
+        Singal::App
       end
 
       def reload!

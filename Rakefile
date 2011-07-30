@@ -17,9 +17,9 @@ end
 
 namespace :picasa do
   desc "Parse picasa photo feed."
-  task :crawl do
+  task :cache do
     require "lib/image_processor"
-    Picawing::ImageProcessor.new
+    Singal::ImageProcessor.new
   end
 end
 
