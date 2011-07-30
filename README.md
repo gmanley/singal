@@ -38,6 +38,8 @@ __Requirements:__
 * MongoDB
 * Ruby
 
+__Steps:__
+
 1. Clone repository
 2. Rename config.yml.example to config.yml
 3. Modify said files with your information
