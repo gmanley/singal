@@ -12,7 +12,7 @@ module Singal
           config.from_hash(YAML.load_file('config/config.yml')["database"][settings.environment.to_s])
         end
       end
-      require "#{settings.root}/lib/photo"
+      require "lib/photo"
     end
 
     configure(:production, :development) do

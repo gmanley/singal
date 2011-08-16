@@ -14,7 +14,7 @@ var AjaxLinks = $.sammy('#content', function() {
 
   this.get('#/page/:page_number', function() {
     $("#loading").fadeIn("fast");
-    $('#content').load("/page/" + this.params['page_number'] + " #content > *", function () {
+    $('#content').load("/page/" + this.params.page_number + " #content > *", function () {
       $("#loading").fadeOut("fast");
       colorbox_init();
     });
