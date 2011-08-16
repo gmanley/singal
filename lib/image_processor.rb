@@ -4,7 +4,7 @@ require 'mongoid'
 require "yaml"
 require "lib/picasa"
 
-module Picawing
+module Singal
   class ImageProcessor
 
     def initialize

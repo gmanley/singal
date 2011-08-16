@@ -1,6 +1,6 @@
 require 'yaml'
 
-module Picawing
+module Singal
   class App < Sinatra::Base
 
     def self.setup_db
@@ -9,11 +9,10 @@ module Picawing
           conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
           config.master = conn.db(URI.parse(ENV['MONGOHQ_URL']).path.gsub(/^\//, ''))
         else
-          # Refactor to use yaml file!
           config.from_hash(YAML.load_file('config/config.yml')["database"][settings.environment.to_s])
         end
       end
-      require "#{settings.root}/lib/photo"
+      require "lib/photo"
     end
 
     configure(:production, :development) do
