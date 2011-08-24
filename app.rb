@@ -5,9 +5,9 @@ module Singal
 
     def self.setup_db
       Mongoid.configure do |config|
-        if ENV['MONGOHQ_URL'] # For heroku deploys
-          conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
-          config.master = conn.db(URI.parse(ENV['MONGOHQ_URL']).path.gsub(/^\//, ''))
+        if mongodb_url = (ENV['MONGOHQ_URL'] || ENV['MONGOLAB_URI']) # For heroku deploys
+          conn = Mongo::Connection.from_uri(mongodb_url)
+          config.master = conn.db(URI.parse(mongodb_url).path.gsub(/^\//, ''))
         else
           config.from_hash(YAML.load_file('config/config.yml')["database"][settings.environment.to_s])
         end
